@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UNILIFE 360 – EBC Toluca</title>
+  <meta name="description" content="UNILIFE 360: Noticias, eventos, mentorías, trabajos, perfil y vida estudiantil de EBC Campus Toluca."/>
+  <style>
+    :root {
+      --azul:#002B5B; --azul-2:#0a3f80; --fondo:#f0f2f5; --texto:#333; --card:#fff;
+      --radio:14px; --shadow:0 6px 18px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--fondo);color:var(--texto)}
+    header{background:linear-gradient(180deg,var(--azul),var(--azul-2));color:#fff;padding:22px 16px;text-align:center;position:sticky;top:0;z-index:5}
+    header .brand{display:flex;gap:12px;align-items:center;justify-content:center}
+    header img.logo{height:28px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+    header h1{margin:6px 0 2px;font-size:22px;letter-spacing:.4px}
+    header p{margin:0;opacity:.9;font-size:14px}
+    main{max-width:980px;margin:0 auto;padding:20px}
+    .pantalla{display:none;animation:fade .2s ease}
+    .visible{display:block}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .panel{background:var(--card);border-radius:var(--radio);box-shadow:var(--shadow);padding:20px;margin:16px auto;max-width:620px}
+    .panel h2{margin:0 0 10px;color:var(--azul)}
+    .panel p.lead{margin:0 0 14px;opacity:.9}
+    input,button,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #d9d9d9;font-size:16px}
+    button{background:var(--azul);color:#fff;border:none;cursor:pointer;transition:.2s}
+    button:hover{background:#0055aa}
+    .btns{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+    @media (min-width:560px){.btns{grid-template-columns:repeat(2,1fr)}}
+    .grid{display:grid;gap:16px}
+    @media (min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .card{background:var(--card);border-radius:var(--radio);box-shadow:var(--shadow);overflow:hidden}
+    .card img{display:block;width:100%;height:auto;object-fit:cover;aspect-ratio:16/9}
+    .card .content{padding:14px}
+    .card h3{margin:0 0 6px;color:var(--azul)}
+    .card p{margin:0 0 8px;line-height:1.45}
+    .meta{font-size:13px;opacity:.8}
+    nav.top-actions{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 0}
+    nav.top-actions button{width:auto}
+    footer{padding:28px 16px;text-align:center;font-size:13px;opacity:.8}
+    .back{margin-top:12px}
+    /* Estilos nuevos para perfil, mentorías y trabajo */
+    .perfil-form, .mentorias-form, .trabajos-form {margin-top:20px;}
+    .file-input {font-size:14px;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img class="logo" src="https://www.ebc.mx/wp-content/uploads/2024/10/ebc_logo-1-1.png" alt="EBC" />
+      <h1>UNILIFE 360 – Campus Toluca</h1>
+    </div>
+    <p>Tu vida universitaria en un solo lugar</p>
+  </header>
+  <main>
+    <!-- Pantallas -->
+    <section id="pantallaRegistro" class="pantalla visible">
+      <div class="panel">
+        <h2>Crear cuenta</h2>
+        <p class="lead">Regístrate para acceder al menú principal, noticias, eventos, comida, mentorías, trabajos y perfil.</p>
+        <form id="formRegistro" autocomplete="on">
+          <input id="usuario" name="usuario" placeholder="Usuario" required/>
+          <input id="password" name="password" type="password" placeholder="Contraseña" required/>
+          <button type="submit">Registrarme</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="pantallaMenu" class="pantalla">
+      <div class="panel">
+        <h2>Bienvenido(a) 👋</h2>
+        <p class="lead">
+          UNILIFE 360 reúne <b>noticias verificadas</b>, <b>eventos</b>, <b>comida del día</b>, <b>mentorías</b>, <b>trabajos</b> y tu <b>perfil personal</b> en un solo lugar.
+        </p>
+        <div class="btns">
+          <button onclick="mostrarPantalla('Noticias')">📰 Noticias</button>
+          <button onclick="mostrarPantalla('Eventos')">📅 Eventos</button>
+          <button onclick="mostrarPantalla('Comida')">🍴 Comida</button>
+          <button onclick="mostrarPantalla('Mentorias')">🎓 Mentorías</button>
+          <button onclick="mostrarPantalla('Trabajos')">📂 Trabajos</button>
+          <button onclick="mostrarPantalla('Perfil')">👤 Perfil</button>
+          <button onclick="cerrarSesion()">🚪 Cerrar sesión</button>
+        </div>
+      </div>
+      <div class="grid">
+        <!-- Mosaico campus -->
+        <figure class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF0116-Editar-scaled-quznwyam3xo8ewntshyfgrldyimv1jshp6vjmdd34k.jpg" alt="Patio central EBC Toluca" /><figcaption class="content">
+          <h3>Patio central</h3><p>Zona de encuentro con mesas y sombra para estudiar o convivir entre clases.</p><div class="meta">Fuente: Sitio oficial EBC Toluca.</div>
+        </figcaption></figure>
+        <figure class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF0128-scaled-quznx4vhfrx8o6e9q2stg7xm47qfjfim23fxzb3bx0.jpg" alt="Interior del campus EBC Toluca" /><figcaption class="content">
+          <h3>Interior del campus</h3><p>Espacios amplios con iluminación natural para un ambiente académico cómodo.</p><div class="meta">Fuente: Sitio oficial EBC Toluca.</div>
+        </figcaption></figure>
+        <figure class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF0524-Pano-Editar-scaled-quznxf7piybe7vz91p9ppnbongbgw3nnrima9co00k.jpg" alt="Fachada EBC Toluca al atardecer" /><figcaption class="content">
+          <h3>Fachada al atardecer</h3><p>Arquitectura moderna y áreas exteriores para tomar un respiro entre materias.</p><div class="meta">Fuente: Sitio oficial EBC Toluca.</div>
+        </figcaption></figure>
+        <figure class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF9945-scaled-quznxqhrsyqu37iv7u58jkh7s2rvggwft2g40o79xw.jpg" alt="Vista panorámica del patio" /><figcaption class="content">
+          <h3>Vida estudiantil</h3><p>El corazón del campus: convivencia, descanso y networking entre estudiantes.</p><div class="meta">Fuente: Sitio oficial EBC Toluca.</div>
+        </figcaption></figure>
+      </div>
+    </section>
+
+    <section id="pantallaNoticias" class="pantalla">
+      <div class="panel">
+        <h2>📰 Noticias</h2>
+        <p class="lead">Actualidad del campus y convocatorias destacadas.</p>
+        <nav class="top-actions"><button class="back" onclick="volverMenu()">⬅ Volver al menú</button></nav>
+      </div>
+
+      <!-- Noticia nueva y más -->
+      <article class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF0116-Editar-scaled-quznwyam3xo8ewntshyfgrldyimv1jshp6vjmdd34k.jpg" alt="Servicios e instalaciones"/></div>
+        <div class="content"><h3>Servicios e instalaciones del Campus Toluca</h3><p>El campus ofrece salones equipados, <b>dos auditorios</b>, <b>dos cafeterías</b>, <b>gimnasio</b>, <b>salón de usos múltiples</b> y <b>centro de aprendizaje</b>, para elevar la experiencia académica y estudiantil.</p><p class="meta">Fuente: página oficial del Campus Toluca.</p></div>
+      </article>
+      <article class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF0524-Pano-Editar-scaled-quznxf7piybe7vz91p9ppnbongbgw3nnrima9co00k.jpg" alt="Vida estudiantil EBC"/><div class="content">
+        <h3>Convocatorias y vida estudiantil</h3><p>La comunidad EBC comparte convocatorias, actividades y logros académicos en sus redes sociales oficiales. Revisa <i>Instagram</i> y <i>Facebook</i> de Campus Toluca para enterarte de lo más reciente.</p><p class="meta">Consulta: Instagram y Facebook oficiales del campus.</p>
+      </div></article>
+      <article class="card"><img src="https://via.placeholder.com/600x337?text=Premiaci%C3%B3n+Estudiantil" alt="Premiación Estudiantil"/><div class="content">
+        <h3>Premiación a proyectos sobresalientes</h3><p>Estudiantes destacados recibieron reconocimientos por la calidad y creatividad de sus proyectos presentados en el semestre actual.</p><p class="meta">Fuente: Comunicación interna del campus.</p>
+      </div></article>
+    </section>
+
+    <section id="pantallaEventos" class="pantalla">
+      <div class="panel">
+        <h2>📅 Eventos</h2>
+        <p class="lead">Agenda universitaria destacada de la comunidad EBC.</p>
+        <nav class="top-actions"><button class="back" onclick="volverMenu()">⬅ Volver al menú</button></nav>
+      </div>
+      <article class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF0128-scaled-quznx4vhfrx8o6e9q2stg7xm47qfjfim23fxzb3bx0.jpg" alt="Feria de Proyectos - EBC Toluca"/><div class="content">
+        <h3>Feria de Proyectos (reciente)</h3><p>Exhibición de proyectos de estudiantes donde presentan soluciones a problemas reales, con retroalimentación de docentes y público.</p><p class="meta">Referente: Reel oficial de EBC sobre la Feria de Proyectos.</p><p class="meta"><a href="https://www.instagram.com/reel/DK2dRjrPyxF/" target="_blank" rel="noopener">Ver publicación en Instagram</a></p>
+      </div></article>
+      <article class="card"><img src="https://www.ebc.mx/wp-content/uploads/elementor/thumbs/DCF0116-Editar-scaled-quznwyam3xo8ewntshyfgrldyimv1jshp6vjmdd34k.jpg" alt="Intercampi EBC"/><div class="content">
+        <h3>Intercampi EBC 2025</h3><p>Encuentro deportivo y cultural entre campus EBC: conecta, compite y crea lazos con estudiantes de todo el país.</p><p class="meta">Referente: Publicaciones oficiales recientes sobre Intercampi EBC.</p><p class="meta"><a href="https://www.facebook.com/ebccampustoluca/posts/1191167506370490/" target="_blank" rel="noopener">Ver anuncio en Facebook</a></p>
+      </div></article>
+      <article class="card"><img src="https://via.placeholder.com/600x337?text=Viaje+a+Panam%C3%A1" alt="Viaje a Panamá"/><div class="content">
+        <h3>Viaje de intercambio a Panamá</h3><p>Oportunidad cultural y académica: estudiantes del campus viajarán a Panamá para participar en talleres, visitas institucionales y proyectos de vinculación internacional.</p><p class="meta">Anuncio interno y redes sociales del campus.</p>
+      </div></article>
+      <article class="card"><img src="https://via.placeholder.com/600x337?text=Convenci%C3%B3n+Empresarial" alt="Convención Empresarial"/><div class="content">
+        <h3>Convención Empresarial Estudiantil</h3><p>Evento con conferencias, networking y simulaciones empresariales, en colaboración con empresas locales e invitados especiales.</p><p class="meta">Organización: Departamento de Vida Estudiantil.</p>
+      </div></article>
+    </section>
+
+    <section id="pantallaComida" class="pantalla">
+      <div class="panel">
+        <h2>🍴 Comida del día</h2>
+        <p class="lead">Sugerencia de menú del día de la cafetería (ilustrativa).</p>
+        <nav class="top-actions"><button class="back" onclick="volverMenu()">⬅ Volver al menú</button></nav>
+      </div>
+      <article class="card"><img src="https://via.placeholder.com/600x337?text=Comida+Típica+Mexicana" alt="Comida Típica Mexicana"/><div class="content">
+        <h3>Menú sugerido</h3>
+        <p>Ejemplo: dorada toluqueña (huarache toluqueño), acompañada con torta de chorizo y garapiña artesanal.</p>
+        <p class="meta">Inspirado en la gastronomía típica de Toluca, incluyendo huarache toluqueño y chorizo toluqueño 1.</p>
+      </div></article>
+    </section>
+
+    <section id="pantallaMentorias" class="pantalla">
+      <div class="panel">
+        <h2>🎓 Mentorías</h2>
+        <p class="lead">Accede a mentorías académicas y profesionales con tutores y exalumnos.</p>
+        <nav class="top-actions"><button class="back" onclick="volverMenu()">⬅ Volver al menú</button></nav>
+      </div>
+      <form class="mentorias-form">
+        <label>¿Qué tema te gustaría abordar?</label>
+        <textarea placeholder="P. ej., orientación de carrera, técnicas de estudio, proyectos..."></textarea>
+        <button type="submit">Solicitar mentoría</button>
+      </form>
+    </section>
+
+    <section id="pantallaTrabajos" class="pantalla">
+      <div class="panel">
+        <h2>📂 Trabajos</h2>
+        <p class="lead">Sube tus trabajos, proyectos o tareas en formato digital.</p>
+        <nav class="top-actions"><button class="back" onclick="volverMenu()">⬅ Volver al menú</button></nav>
+      </div>
+      <form class="trabajos-form">
+        <label>Selecciona archivo para subir</label>
+        <input type="file" class="file-input" accept="image/*,application/pdf,application/msword"/>
+        <button type="submit">Subir trabajo</button>
+      </form>
+    </section>
+
+    <section id="pantallaPerfil" class="pantalla">
+      <div class="panel">
+        <h2>👤 Perfil</h2>
+        <p class="lead">Actualiza tu foto de perfil y datos personales.</p>
+        <nav class="top-actions"><button class="back" onclick="volverMenu()">⬅ Volver al menú</button></nav>
+      </div>
+      <form class="perfil-form">
+        <label>Foto de perfil:</label>
+        <input type="file" class="file-input" accept="image/*"/>
+        <label>Biografía breve:</label>
+        <textarea placeholder="Escribe algo sobre ti..."></textarea>
+        <button type="submit">Guardar perfil</button>
+      </form>
+    </section>
+
+  </main>
+  <footer>
+    <small>© UNILIFE 360 (prototipo educativo) — EBC Toluca. Imágenes del campus y logo: ebc.mx.</small>
+  </footer>
+  <script>
+    const $ = sel => document.querySelector(sel);
+    const pantallas = {
+      Registro: "#pantallaRegistro",
+      Menu: "#pantallaMenu",
+      Noticias: "#pantallaNoticias",
+      Eventos: "#pantallaEventos",
+      Comida: "#pantallaComida",
+      Mentorias: "#pantallaMentorias",
+      Trabajos: "#pantallaTrabajos",
+      Perfil: "#pantallaPerfil"
+    };
+    function ir(id){
+      document.querySelectorAll(".pantalla").forEach(s => s.classList.remove("visible"));
+      document.querySelector(id).classList.add("visible");
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+    function mostrarPantalla(nombre){ ir(pantallas[nombre]); }
+    function volverMenu(){ ir(pantallas.Menu); }
+    function cerrarSesion(){ ir(pantallas.Registro); }
+
+    $("#formRegistro").addEventListener("submit", e => {
+      e.preventDefault();
+      const u = $("#usuario").value.trim(), p = $("#password").value.trim();
+      if (!u || !p){ alert("Completa todos los campos."); return; }
+      ir(pantallas.Menu);
+    });
+    // Formularios de mentorías, trabajos y perfil se podrían continuar con lógica JS según necesidades
+  </script>
+</body>
+</html>
